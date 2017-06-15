@@ -14,6 +14,11 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+/**
+ * rest api exception handler
+ * @author benson0217
+ *
+ */
 @EnableWebMvc
 @RestControllerAdvice
 public class SecurityApiExceptionHandler {

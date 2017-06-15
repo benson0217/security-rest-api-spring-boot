@@ -4,6 +4,11 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * group service , base on spinrg security JdbcUserDetailsManager 
+ * @author benson0217
+ *
+ */
 public interface GroupService {
 
     List<String> findAllGroups();

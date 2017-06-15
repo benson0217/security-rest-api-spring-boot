@@ -8,14 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +24,11 @@ import com.security.rest.api.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * rest api for spring security user related operation 
+ * @author benson0217
+ *
+ */
 @Slf4j
 @PreAuthorize("hasRole('ROLE_ADMIN')") 
 @RestController
@@ -36,6 +37,11 @@ public class UserController {
     
     @Autowired UserService userService;
 
+    /**
+     * create user
+     * @param user
+     * @return HttpEntity
+     */
     @PostMapping
     public HttpEntity<Object> createUser(@RequestBody User user) {
         
@@ -45,6 +51,11 @@ public class UserController {
         return new ResponseEntity<Object>(HttpStatus.CREATED);
     }
 
+    /**
+     * upate user name,password and change enable states
+     * @param user
+     * @return HttpEntity
+     */
     @PutMapping
     public HttpEntity<Object> updateUser(@RequestBody User user) {
         
@@ -62,20 +73,22 @@ public class UserController {
         return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * delete user by use name
+     * @param username
+     * @return HttpEntity
+     */
     @DeleteMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<Object> deleteUser(@PathVariable String username) {
         userService.deleteUser(username);
         return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
     }
 
-    
-//    @PatchMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public HttpEntity<Object> changePassword(String oldPassword, @RequestBody UserDetails user) {
-//        
-//        userService.changePassword(oldPassword, user.getPassword());
-//        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
-//    }
-
+    /**
+     * check user exists by user name
+     * @param username
+     * @return HttpEntity
+     */
     @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<Object> userExists(@PathVariable String username) {
         
