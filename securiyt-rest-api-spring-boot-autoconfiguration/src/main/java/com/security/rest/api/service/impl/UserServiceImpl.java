@@ -32,12 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public void changePassword(String oldPassword, String newPassword) {
-        jdbcUserDetailsManager.changePassword(oldPassword, newPassword);
-    }
-
-    @Override
     public boolean userExists(String username) {
         return jdbcUserDetailsManager.userExists(username);
     }
